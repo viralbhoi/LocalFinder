@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div id="logo_1"></div>
+        <div>
+            <nav>
+                <div><a href="login.html">Log In</a></div>
+                <div><a href="user_reg.html">Register</a></div>
+                <div><a href="about.html">About Us</a></div>
+                <div><a href="contact.html">Contact Us</a></div>
+            </nav>
+            <div class="set-location">
+            </div>
+            <div id="search-box" required>
+                <select name="locate" id="locate">
+                    <option value="Anand">Anand</option>
+                </select>
+                <i class="fas fa-search"></i>
+                <input type="text" id="search" placeholder="Search...">
+            </div>
+        </div>
+    </header>
+    <section class="reg_screen">
+        <fieldset class="reg1">
+            <legend><h2>Register</h2></legend>
+            <form name="reg_form" method="post" action="index.html">
+                <label for="name">Username:</label>
+                <input type="text" id="name" required/><br/><br/>
+                <label for="pass1">Password : </label>
+                <input type="password" id="pass1" required/><br/><br/>
+                <label for="pass2"> Confirm Password : </label>
+                <input type="password" id="pass2" required/><br/><br/>
+                <label for="mob">Mobile No.:</label>
+                <input type="number" id="mob" required/><br/><br/>
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" required/><br/><br/>
+                <label for="address">Address: </label>
+                <textarea id="address" rows="5"></textarea><br/><br/>
+                <label for="District">District:</label>
+                <input type="text" id="District" required/><br/><br/>
+                <label for="State">State:</label>
+                <input type="text" id="State" required/><br/><br/>
+                <input type="submit" value="Register"id="sub1" required/>
+                <input type="reset" id="sub1" required/>
+                <p><a href="#">Forgot Password?</a></p>
+            </form>
+        </fieldset>
+        <center>
+            <p>Already have account ? <a href="login.html">Log In</a></p>
+        </center>
+    </section>
+    <footer>
+
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 LocalFinder. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
+
