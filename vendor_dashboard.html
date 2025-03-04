@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vendor Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div id="logo_1"></div>
+        <div>
+            <nav>
+                <div><a href="index.html">Home</a></div>
+                <div><a href="user_profile_view.html">My Profile</a></div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="vendor-profile">
+        <h2>Vendor Dashboard</h2>
+
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <h3>Shop Name</h3>
+                <p>My Awesome Shop</p>
+            </div>
+            <div class="stat-card">
+                <h3>Total Views</h3>
+                <p id="v1">1,23</p>
+            </div>
+        </div>
+
+        <div class="inventory-status">
+            <h3>Inventory Status</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Stock Level</th>
+                        <th>Update Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Product A</td>
+                        <td><span id="stock-level-productA">12</span></td>
+                        <td><input type="number" id="update-stock-productA" value="12" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td>Product B</td>
+                        <td><span id="stock-level-productB">19</span></td>
+                        <td><input type="number" id="update-stock-productB" value="19" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td>Product C</td>
+                        <td><span id="stock-level-productC">3</span></td>
+                        <td><input type="number" id="update-stock-productC" value="3" min="0"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="sub1" onclick="updateStock()">Update Stock</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 LocalFinder. All rights reserved.
+        </div>
+    </footer>
+    <script src="scripts/app.js"></script>
+
+</body>
+</html>

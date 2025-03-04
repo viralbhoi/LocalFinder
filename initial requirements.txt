@@ -1,0 +1,301 @@
+Thank you for the clarification! Based on your updated requirements, here’s a revised outline for the *Vendor Mix* project. This version emphasizes the role of supply staff (delivery personnel) and clarifies the overall purpose of the website.
+
+## Project Overview: Vendor Mix
+
+The *Vendor Mix* platform is designed to connect customers with local vendors, allowing them to search for products and either visit the shops in person or request delivery through supply staff (delivery personnel). The goal is to provide a centralized marketplace for local vendors to market their products while offering convenience to customers.
+
+### Key Features
+
+1. *Product Search Functionality*
+   - Customers can search for products by name.
+   - The system displays a list of local vendors that have the requested item in stock.
+   - Each vendor listing includes:
+     - Shop name
+     - Description
+     - Location (with a link to Google Maps)
+     - Current stock status
+
+2. *Additional Item Requests*
+   - If a product is not found, customers can request it.
+   - Requests are sent to supply staff for approval, who will determine if they can deliver the item.
+
+3. *User Roles and Registration*
+   The platform supports multiple user roles, each with specific functionalities:
+
+   #### 1. Admin
+   - Manages the platform and verifies vendor registrations.
+   - Oversees operations and user management.
+
+   #### 2. Deployment Staff
+   - Responsible for verifying vendor registrations.
+   - Manages logistics but does not need to be listed on the website.
+
+   #### 3. Supply Staff (Delivery Personnel)
+   - Delivery personnel can choose to accept or decline delivery requests from customers.
+   - They do not need a dedicated login on the website but are registered in the system for coordination purposes.
+
+   #### 4. Vendors
+   - Vendors can log in to manage their profiles and inventory.
+   - Registration is initiated by deployment staff after verification of business credentials.
+
+   #### 5. Customers
+   - Customers can register themselves through an online form.
+   - They can search for products and choose to either visit shops or request delivery.
+
+### Technology Stack
+
+- *Frontend*: HTML, CSS, JavaScript (AngularJS)
+- *Backend*: PHP
+- *Database*: MySQL (SQL)
+- *APIs*: Google Maps API for location services
+
+### Implementation Steps
+
+#### 1. Database Design
+
+Create a MySQL database with the following tables:
+
+- *users*
+  - id (INT, Primary Key)
+  - name (VARCHAR)
+  - email (VARCHAR, Unique)
+  - password (VARCHAR)
+  - role (ENUM: 'admin', 'vendor', 'deployment_staff', 'supply_staff', 'customer')
+
+- *vendors*
+  - id (INT, Primary Key)
+  - user_id (INT, Foreign Key referencing users.id)
+  - shop_name (VARCHAR)
+  - description (TEXT)
+  - location (VARCHAR)
+  - stock (JSON or separate product table)
+
+- *products*
+  - id (INT, Primary Key)
+  - name (VARCHAR)
+  - vendor_id (INT, Foreign Key referencing vendors.id)
+  - available_stock (INT)
+
+- *additional_requests*
+  - id (INT, Primary Key)
+  - customer_id (INT, Foreign Key referencing users.id)
+  - product_name (VARCHAR)
+  - status (ENUM: 'pending', 'approved', 'rejected')
+  
+- *delivery_requests*
+  - id (INT, Primary Key)
+  - customer_id (INT, Foreign Key referencing users.id)
+  - vendor_id (INT, Foreign Key referencing vendors.id)
+  - product_name (VARCHAR)
+  - delivery_time (DATETIME)
+  - status (ENUM: 'pending', 'accepted', 'completed')
+
+#### 2. Frontend Development
+
+##### HTML Structure
+
+Create the basic structure of your application using HTML. Here’s an example of how you might structure your main pages:
+
+- *index.html*: Main page for product search
+- *register.html*: Customer registration page
+- *vendor_login.html*: Vendor login page
+- *admin_dashboard.html*: Admin dashboard for managing users and requests
+
+##### CSS Styling
+
+Use CSS to style your application. Consider using a framework like Bootstrap for responsive design.
+
+##### AngularJS Components
+
+1. *Product Search Component*
+   javascript
+   angular.module('vendorMixApp', [])
+       .controller('SearchController', function($scope, $http) {
+           $scope.searchProducts = function() {
+               $http.get('api/search.php?product=' + $scope.productName).then(function(response) {
+                   $scope.vendors = response.data;
+               });
+           };
+       });
+   
+
+2. *Customer Registration Component*
+   javascript
+   angular.module('vendorMixApp')
+       .controller('RegistrationController', function($scope, $http) {
+           $scope.registerCustomer = function() {
+               $http.post('api/register.php', $scope.customerData).then(function(response) {
+                   alert(response.data.message);
+               });
+           };
+       });
+   
+
+3. *Delivery Request Component*
+   javascript
+   angular.module('vendorMixApp')
+       .controller('DeliveryRequestController', function($scope, $http) {
+           $scope.requestDelivery = function(vendorId) {
+               const requestData = {
+                   customerId: $scope.customerId,
+                   vendorId: vendorId,
+                   productName: $scope.productName,
+                   deliveryTime: $scope.deliveryTime,
+               };
+               $http.post('api/request_delivery.php', requestData).then(function(response) {
+                   alert(response.data.message);
+               });
+           };
+       });
+   
+
+#### 3. Backend Development with PHP
+
+Create PHP scripts to handle requests from the frontend.
+
+##### Example PHP Scripts
+
+1. *search.php*: Handles product search
+   php
+   <?php
+   include 'db_connection.php'; // Include database connection file
+   $product_name = $_GET['product'];
+   
+   $query = "SELECT * FROM vendors WHERE stock LIKE '%$product_name%'";
+   $result = mysqli_query($conn, $query);
+   
+   $vendors = [];
+   while ($row = mysqli_fetch_assoc($result)) {
+       $vendors[] = $row;
+   }
+   
+   echo json_encode($vendors);
+   ?>
+   
+
+2. *register.php*: Handles customer registration
+   php
+   <?php
+   include 'db_connection.php';
+   
+   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+       $name = $_POST['name'];
+       $email = $_POST['email'];
+       $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+       
+       $query = "INSERT INTO users (name, email, password, role) VALUES ('$name', '$email', '$password', 'customer')";
+       if (mysqli_query($conn, $query)) {
+           echo json_encode(['message' => 'Registration successful!']);
+       } else {
+           echo json_encode(['message' => 'Registration failed!']);
+       }
+   }
+   ?>
+   
+
+3. *request_delivery.php*: Handles delivery requests from customers
+   php
+   <?php
+   include 'db_connection.php';
+   
+   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+       $customer_id = $_POST['customerId'];
+       $vendor_id = $_POST['vendorId'];
+       $product_name = $_POST['productName'];
+       $delivery_time = $_POST['deliveryTime'];
+       
+       // Insert delivery request into database
+       $query = "INSERT INTO delivery_requests (customer_id, vendor_id, product_name, delivery_time, status) VALUES ('$customer_id', '$vendor_id', '$product_name', '$delivery_time', 'pending')";
+       
+       if (mysqli_query($conn, $query)) {
+           echo json_encode(['message' => 'Delivery request submitted successfully!']);
+       } else {
+           echo json_encode(['message' => 'Failed to submit delivery request!']);
+       }
+   }
+   ?>
+   
+
+#### 4. Google Maps Integration
+
+To show vendor locations on a map:
+
+1. Obtain an API key from Google Cloud Platform.
+2. Use the Maps JavaScript API to embed maps on your vendor listings page.
+
+### Conclusion
+
+The revised *Vendor Mix* project focuses on providing a centralized platform for local vendors while allowing customers to easily locate products and choose between visiting shops or requesting delivery through supply staff. By implementing structured user roles and functionalities using HTML, CSS, JavaScript (AngularJS), PHP, and MySQL, this project aims to enhance local shopping experiences effectively.
+
+If you have any further questions or need additional assistance with specific components of this project, feel free to ask!
+
+# Local Finder Project
+
+## Title
+Local Finder
+
+## Functional Requirements
+1. *Product Search Functionality*
+   - Allow customers to search for products by name.
+   - Display a list of local vendors with the requested item in stock, including:
+     - Shop name
+     - Description
+     - Location (with Google Maps link)
+     - Current stock status
+
+2. *Additional Item Requests*
+   - Enable customers to request products not found in the initial search.
+   - Forward requests to supply staff for approval.
+
+3. *User Roles and Registration*
+   - Support multiple user roles with specific functionalities:
+     - *Admin*: Manage platform operations and user registrations.
+     - *Deployment Staff*: Verify vendor registrations and manage logistics.
+     - *Supply Staff (Delivery Personnel)*: Accept or decline delivery requests; no dedicated login required.
+     - *Vendors*: Manage profiles and inventory after registration by deployment staff.
+     - *Customers*: Register online, search for products, and choose between visiting shops or requesting delivery.
+
+4. *Technology Stack*
+   - Frontend: HTML, CSS, JavaScript (AngularJS)
+   - Backend: PHP
+   - Database: MySQL
+   - APIs: Google Maps API for location services
+
+5. *Database Design*
+   - Create tables for users, vendors, products, additional requests, and delivery requests.
+
+6. *Frontend Development*
+   - Develop HTML structure for main pages (index, registration, vendor login, admin dashboard).
+   - Style the application using CSS and frameworks like Bootstrap.
+   - Implement AngularJS components for product search, customer registration, and delivery requests.
+
+7. *Backend Development*
+   - Create PHP scripts to handle product searches, customer registrations, and delivery requests.
+
+8. *Google Maps Integration*
+   - Embed maps on vendor listings using Google Maps JavaScript API.
+
+## Modules Required
+1. *User Management Module*
+   - Handles user registrations and role assignments.
+
+2. *Product Management Module*
+   - Manages product listings from vendors.
+
+3. *Search Module*
+   - Facilitates product search functionality.
+
+4. *Delivery Request Module*
+   - Manages customer delivery requests and interactions with supply staff.
+
+5. *Vendor Management Module*
+   - Allows vendors to manage their profiles and inventory.
+
+6. *Admin Dashboard Module*
+   - Provides administrative controls for managing users and overseeing operations.
+
+7. *Mapping Module*
+   - Integrates Google Maps for vendor locations.
+
+The project has been renamed to "Local Finder," reflecting its purpose of helping customers locate local products and vendors efficiently. If you need further modifications or additional information about any aspect of the project, feel free to ask!
+

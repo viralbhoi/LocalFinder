@@ -1,0 +1,836 @@
+# Local Finder Project
+
+## Title
+Local Finder
+
+## Functional Requirements
+1. *Product Search Functionality*
+   - Allow customers to search for products by name.
+   - Display a list of local vendors with the requested item in stock, including:
+     - Shop name
+     - Description
+     - Location (with Google Maps link)
+     - Current stock status
+
+2. *Additional Item Requests*
+   - Enable customers to request products not found in the initial search.
+   - Forward requests to supply staff for approval.
+
+3. *User Roles and Registration*
+   - Support multiple user roles with specific functionalities:
+     - *Admin*: Manage platform operations and user registrations.
+     - *Deployment Staff*: Verify vendor registrations and manage logistics.
+     - *Supply Staff (Delivery Personnel)*: Accept or decline delivery requests; no dedicated login required.
+     - *Vendors*: Manage profiles and inventory after registration by deployment staff.
+     - *Customers*: Register online, search for products, and choose between visiting shops or requesting delivery.
+
+4. *Technology Stack*
+   - Frontend: HTML, CSS, JavaScript (AngularJS)
+   - Backend: PHP
+   - Database: MySQL
+   - APIs: Google Maps API for location services
+
+5. *Database Design*
+   - Create tables for users, vendors, products, additional requests, and delivery requests.
+
+6. *Frontend Development*
+   - Develop HTML structure for main pages (index, registration, vendor login, admin dashboard).
+   - Style the application using CSS and frameworks like Bootstrap.
+   - Implement AngularJS components for product search, customer registration, and delivery requests.
+
+7. *Backend Development*
+   - Create PHP scripts to handle product searches, customer registrations, and delivery requests.
+
+8. *Google Maps Integration*
+   - Embed maps on vendor listings using Google Maps JavaScript API.
+
+## Modules Required
+1. *User Management Module*
+   - Handles user registrations and role assignments.
+
+2. *Product Management Module*
+   - Manages product listings from vendors.
+
+3. *Search Module*
+   - Facilitates product search functionality.
+
+4. *Delivery Request Module*
+   - Manages customer delivery requests and interactions with supply staff.
+
+5. *Vendor Management Module*
+   - Allows vendors to manage their profiles and inventory.
+
+6. *Admin Dashboard Module*
+   - Provides administrative controls for managing users and overseeing operations.
+
+7. *Mapping Module*
+   - Integrates Google Maps for vendor locations.
+
+note that vendor_profile is page which cant be reached without authentication which is to be implemented later
+
+index.html:
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LocalFinder</title>
+    <link rel="stylesheet" type="text/css" href="style1.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <section id="first_page">
+      <header>
+        <div id="logo_1"></div>
+        <div>
+          <nav>
+            <div><a href="login.html">Log In</a></div>
+            <div><a href="user_reg.html">Register</a></div>
+            <div><a href="about.html">About Us</a></div>
+            <div><a href="contact.html">Contact Us</a></div>
+          </nav>
+          <div class="set-location"></div>
+          <!-- <div id="search-box" required>
+                <select name="locate" id="locate">
+                    <option value="Anand">Anand</option>
+                </select>
+                <i class="fas fa-search"></i>
+                <input type="text" id="search" placeholder="Search...">
+            </div> -->
+        </div>
+      </header>
+
+      <div id="container">
+      <div id="brand_name">
+        <h1>Local<br>Finder</h1>
+        <p>Find in your locality</p>
+      </div>
+
+      <div id="Left">
+        
+        <select name="locate" id="locate">
+          <option value="Anand">Anand</option>
+        </select>
+        <i class="fas fa-search"></i>
+        <input type="text" id="search" placeholder="Search..." />
+      </div>
+      </div>
+    </section>
+    <section class="brief">
+      <p align="center">
+        <em
+          >LocalFinder is a website for finding products in your own
+          locality.</em
+        >
+      </p>
+    </section>
+    <section class="Advertise"></section>
+    <section class="main-content">
+      <section class="recommendations">
+        <div class="product">
+          <div class="pic" id="pic_1"></div>
+          <div class="description">
+            <h6>Lorem 1</h6>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos odit,
+              consectetur quo ullam excepturi fuga id, et cupiditate deleniti
+              libero accusantium. Modi soluta consectetur at vitae sit commodi
+              iste! Molestiae.
+            </p>
+          </div>
+        </div>
+        <div class="product">
+          <div class="pic" id="pic_2"></div>
+          <div class="description">
+            <h6>Lorem 1</h6>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos odit,
+              consectetur quo ullam excepturi fuga id, et cupiditate deleniti
+              libero accusantium. Modi soluta consectetur at vitae sit commodi
+              iste! Molestiae.
+            </p>
+          </div>
+        </div>
+        <div class="product">
+          <div class="pic" id="pic_3"></div>
+          <div class="description">
+            <h6>Lorem 1</h6>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos odit,
+              consectetur quo ullam excepturi fuga id, et cupiditate deleniti
+              libero accusantium. Modi soluta consectetur at vitae sit commodi
+              iste! Molestiae.
+            </p>
+          </div>
+        </div>
+      </section>
+      <p align="center">& MANY MORE...</p>
+      <section class="additional"></section>
+    </section>
+    <footer>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+      <div class="copyright">&copy; 2025 LocalFinder. All rights reserved.</div>
+    </footer>
+  </body>
+</html>
+
+
+login.html:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div id="logo_1"></div>
+        <div>
+            <nav>
+                <div><a href="login.html">Log In</a></div>
+                <div><a href="user_reg.html">Register</a></div>
+                <div><a href="about.html">About Us</a></div>
+                <div><a href="contact.html">Contact Us</a></div>
+            </nav>
+            <div class="set-location">
+            </div>
+            <div id="search-box" required>
+                <select name="locate" id="locate">
+                    <option value="Anand">Anand</option>
+                </select>
+                <i class="fas fa-search"></i>
+                <input type="text" id="search" placeholder="Search...">
+            </div>
+        </div>
+    </header>
+    <section class="login_screen">
+        <fieldset class="login1">
+            <legend><h2>Log In</h2></legend>
+            <form name="login_form" method="post" action="index.html">
+                <label for="name">Username:</label>
+                <input type="text" id="name" required/><br/><br/>
+                <label for="pass1">Password : </label>
+                <input type="password" id="pass1" required/><br/><br/>
+                <input type="submit" value="Log In"id="sub1" required/>
+                <input type="reset" id="sub1" required/>
+                <p><a href="Forgot.html">Forgot Password?</a></p>
+            </form>
+        </fieldset>
+        <center>
+            <h2>OR</h2>
+        </center>
+        <a href="user_reg.html" id="new_account">Create New Account</a>
+    </section>
+    <footer>
+
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 LocalFinder. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
+
+
+user_reg.html:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div id="logo_1"></div>
+        <div>
+            <nav>
+                <div><a href="login.html">Log In</a></div>
+                <div><a href="user_reg.html">Register</a></div>
+                <div><a href="about.html">About Us</a></div>
+                <div><a href="contact.html">Contact Us</a></div>
+            </nav>
+            <div class="set-location">
+            </div>
+            <div id="search-box" required>
+                <select name="locate" id="locate">
+                    <option value="Anand">Anand</option>
+                </select>
+                <i class="fas fa-search"></i>
+                <input type="text" id="search" placeholder="Search...">
+            </div>
+        </div>
+    </header>
+    <section class="reg_screen">
+        <fieldset class="reg1">
+            <legend><h2>Register</h2></legend>
+            <form name="reg_form" method="post" action="index.html">
+                <label for="name">Username:</label>
+                <input type="text" id="name" required/><br/><br/>
+                <label for="pass1">Password : </label>
+                <input type="password" id="pass1" required/><br/><br/>
+                <label for="pass2"> Confirm Password : </label>
+                <input type="password" id="pass2" required/><br/><br/>
+                <label for="mob">Mobile No.:</label>
+                <input type="number" id="mob" required/><br/><br/>
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" required/><br/><br/>
+                <label for="address">Address: </label>
+                <textarea id="address" rows="5"></textarea><br/><br/>
+                <label for="District">District:</label>
+                <input type="text" id="District" required/><br/><br/>
+                <label for="State">State:</label>
+                <input type="text" id="State" required/><br/><br/>
+                <input type="submit" value="Register"id="sub1" required/>
+                <input type="reset" id="sub1" required/>
+            </form>
+        </fieldset>
+        <center>
+            <p>Already have account ? <a href="login.html">Log In</a></p>
+        </center>
+    </section>
+    <footer>
+
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 LocalFinder. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
+
+
+about.html:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div id="logo_1"></div>
+        <div>
+            <nav>
+                <div><a href="login.html">Log In</a></div>
+                <div><a href="user_reg.html">Register</a></div>
+                <div><a href="about.html">About Us</a></div>
+                <div><a href="contact.html">Contact Us</a></div>
+            </nav>
+            <div class="set-location">
+            </div>
+            <div id="search-box" required>
+                <select name="locate" id="locate">
+                    <option value="Anand">Anand</option>
+                </select>
+                <i class="fas fa-search"></i>
+                <input type="text" id="search" placeholder="Search...">
+            </div>
+        </div>
+    </header>
+    <section class="about">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam dolores est omnis molestias maxime cum voluptatem tenetur tempora! Aliquam suscipit alias cupiditate molestias blanditiis, natus velit! Doloribus vitae delectus tempora.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos voluptatibus voluptatem ab, labore impedit delectus illo, quo eius consequatur nulla blanditiis, quis aut nemo possimus laudantium eaque? Illo, tenetur veniam.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi dolorem quas assumenda, molestias ex velit suscipit et quidem optio in beatae nostrum, eveniet facere quae sint blanditiis. Possimus, cum earum!
+        
+    </section>
+    <footer>
+
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 LocalFinder. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
+
+
+contact.html:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div id="logo_1"></div>
+        <div>
+            <nav>
+                <div><a href="login.html">Log In</a></div>
+                <div><a href="user_reg.html">Register</a></div>
+                <div><a href="about.html">About Us</a></div>
+                <div><a href="contact.html">Contact Us</a></div>
+            </nav>
+            <div class="set-location">
+            </div>
+            <div id="search-box" required>
+                <select name="locate" id="locate">
+                    <option value="Anand">Anand</option>
+                </select>
+                <i class="fas fa-search"></i>
+                <input type="text" id="search" placeholder="Search...">
+            </div>
+        </div>
+    </header>
+    <section class="about">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam dolores est omnis molestias maxime cum voluptatem tenetur tempora! Aliquam suscipit alias cupiditate molestias blanditiis, natus velit! Doloribus vitae delectus tempora.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos voluptatibus voluptatem ab, labore impedit delectus illo, quo eius consequatur nulla blanditiis, quis aut nemo possimus laudantium eaque? Illo, tenetur veniam.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi dolorem quas assumenda, molestias ex velit suscipit et quidem optio in beatae nostrum, eveniet facere quae sint blanditiis. Possimus, cum earum!
+        
+    </section>
+    <footer>
+
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 LocalFinder. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
+
+Forgot.html:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div id="logo_1"></div>
+        <div>
+            <nav>
+                <div><a href="login.html">Log In</a></div>
+                <div><a href="user_reg.html">Register</a></div>
+                <div><a href="about.html">About Us</a></div>
+                <div><a href="contact.html">Contact Us</a></div>
+            </nav>
+            <div class="set-location">
+            </div>
+            <div id="search-box" required>
+                <select name="locate" id="locate">
+                    <option value="Anand">Anand</option>
+                </select>
+                <i class="fas fa-search"></i>
+                <input type="text" id="search" placeholder="Search...">
+            </div>
+        </div>
+    </header>
+    <section class="login_screen">
+        <fieldset class="login1">
+            <legend><h2>Forgot Password</h2></legend>
+            <form name="forgot_form" method="post" action="index.html">
+                <label for="name">Username:</label>
+                <input type="text" id="name" required/><br/><br/>
+                <input type="submit" value="Submit"id="sub1" required/>
+                <input type="reset" id="sub1" required/>
+            </form>
+        </fieldset>
+    </section>
+    <footer>
+
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 LocalFinder. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
+
+
+admin_dashboard.html:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Local Finder - Admin Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+        <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1"/>
+      </svg>
+</head>
+<body>
+    <header>
+        
+        <div>
+            <div id="logo_1"></div>
+            <i align="right"class="bi bi-arrow-left-square-fill"></i>
+        </div>
+    </header>
+    <h1>Admin Dashboard</h1>
+
+    <ul>
+        <li><a href="manage_users.php">Manage Users</a></li>
+        <li><a href="manage_vendors.php">Manage Vendors</a></li>
+        <li><a href="manage_requests.php">Manage Requests</a></li>
+    </ul>
+    <footer>
+
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 LocalFinder. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
+
+vendor_profile.html:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Local Finder - Update Vendor Profile</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <header>
+        <div id="logo_1"></div>
+        <div>
+            <nav>
+                <div><a href="about.html">About Us</a></div>
+                <div><a href="contact.html">Contact Us</a></div>
+            </nav>
+            <div align="right"></div>
+            <div class="set-location">
+            </div>
+            <div id="search-box" required>
+                <i class="fas fa-search"></i>
+                <input type="text" id="search" placeholder="Search...">
+            </div>
+        </div>
+    </header>
+    <h1>Update Profile</h1>
+
+    <form method="POST">
+        <label for="name">Owner Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="shop-name">Shop Name:</label>
+        <input type="text" id="shop-name" name="shop-name" required>
+
+        <label for="products">Products:</label>
+        <textarea id="products" name="products" placeholder="e.g.:product1, product2..." required></textarea>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required>
+
+        <input type="submit" value="Update Profile">
+    </form>
+    <footer>
+
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 LocalFinder. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
+
+style.css:
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+#logo_1 {
+    width: 100px;
+    height: 100px;
+    background-image: url("icon_no_text.png");
+    background-blend-mode: dark;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%; 
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 255, 0.6);
+    border-bottom: 1px solid black;
+    padding: 10px 20px;
+}
+
+nav {
+    display: flex;
+}
+
+header > div {
+    display: flex;
+}
+
+nav > div {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+nav > div > a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav > div > a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#search-box {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#search-box i {
+    color: white;
+    margin-right: 5px;
+}
+
+#search {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+#locate{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 7px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    nav {
+        margin-top: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.social-icons {
+    margin-bottom: 10px;
+}
+
+.social-icons a {
+    color: #fff;
+    margin-right: 10px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #ccc;
+}
+
+.copyright {
+    font-size: 14px;
+}
+
+.product {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 20px;
+    width: 300px;
+    transition: box-shadow 0.3s ease; /* Add transition for box-shadow */
+}
+
+.product:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add box-shadow on hover */
+}
+
+.pic {
+    background-image: url('path/to/image.jpg'); /* Replace with the actual image path */
+    background-position: center;
+    background-size: cover;
+    height: 200px;
+}
+
+.description {
+    margin-top: 10px;
+}
+
+.recommendations {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.recommendations p {
+    margin-top: 20px;
+}
+
+form > label {
+    display: inline-block;
+    width: 35%;
+}
+
+form > input {
+    height: 25px;
+    width: 50%;
+    border-radius: 8px;
+    border: 1px solid black;
+    padding:0 10px;
+}
+
+form > textarea {
+    width: 50%;
+    resize: none;
+    padding:0 10px;
+    border-radius: 8px;
+}
+
+#sub1{
+    width: 30%;
+    height: 35px;
+    background: rgba(0, 0, 255, 0.6);
+    color: #fff;
+}
+
+form > p{
+    font-size: 80%;
+}
+
+.reg_screen, .login_screen{
+    width: 40%;
+    margin: auto;
+    padding: 10px;
+}
+
+#new_account{
+    display: block;
+    width: 40%;
+    background: rgba(0, 0, 255, 0.6);
+    color: #fff;
+    text-decoration: none;
+    height: 25px;
+    text-align: center;
+    border-radius: 8px;
+    margin: auto;
+}
+
+#new_account:hover , #sub1:hover{
+    background-color: rgba(0, 0, 255, 0.4);
+}
+
+.about{
+    width: 80%;
+    margin: auto;
+}
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+/* Vendor listing styles */
+#search {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#product-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#product-list li {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f2f2f2;
+}
+
+/* Map styles */
+#map {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 20px;
+}
+
+/* Admin dashboard styles */
+#admin-dashboard ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#admin-dashboard ul li {
+    margin-bottom: 10px;
+}
+
+#admin-dashboard ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* Other styles for other pages (e.g., registration, vendor profile) can be added here */
+
+
+give output as file by file .

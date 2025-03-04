@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Local Finder - Update Vendor Profile</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+</head>
+<body>
+    <header>
+        <div id="logo_1"></div>
+        <div>
+            <nav>
+                <div><a href="about.html">About Us</a></div>
+                <div><a href="contact.html">Contact Us</a></div>
+            </nav>
+            <div align="right"></div>
+            <div class="set-location">
+            </div>
+            <div id="search-box" required>
+                <i class="fas fa-search"></i>
+                <input type="text" id="search" placeholder="Search...">
+            </div>
+        </div>
+    </header>
+    <h1>Update Profile</h1>
+
+    <form method="POST">
+        <label for="name">Owner Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="shop-name">Shop Name:</label>
+        <input type="text" id="shop-name" name="shop-name" required>
+
+        <label for="products">Products:</label>
+        <textarea id="products" name="products" placeholder="e.g.:product1, product2..." required></textarea>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required>
+
+        <input type="submit" value="Update Profile">
+    </form>
+    <footer>
+
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 LocalFinder. All rights reserved.
+        </div>
+    </footer>
+    <script src="scripts/app.js"></script>
+
+</body>
+</html>
