@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Forgot Password</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .forgot-password-form {
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 400px;
+        }
+
+        .forgot-password-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .forgot-password-form input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        #sub1{
+            width:200px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="logo_1"></div>
+        <div>
+            <nav>
+                <div><a href="login.html"><i class="fas fa-sign-in-alt"></i> Log In</a></div>
+                <div><a href="user_reg.html"><i class="fas fa-user-plus"></i> Register</a></div>
+                <div><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></div>
+            </nav>
+        </div>
+    </header>
+    <section class="forgot-password">
+        <div class="forgot-password-form">
+            <h2>Forgot Password</h2>
+            <form id="forgotPasswordForm">
+                <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+                <input type="email" id="email" name="email" required>
+                <button id="sub1" type="submit">Reset Password</button>
+            </form>
+        </div>
+    </section>
+    <footer>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 LocalFinder. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="scripts/forgotPassword.js" type="text/javascript"></script>
+    <script src="scripts/app.js" type="text/javascript"></script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Local Finder - Admin Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .dashboard-list {
+            list-style: none;
+            padding: 0;
+        }
+        .dashboard-list li {
+            margin-bottom: 10px;
+        }
+        .dashboard-list li a {
+            display: block;
+            padding: 10px;
+            background-color: #f0f0f0;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .dashboard-list li a:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+            <div id="logo_1"></div>
+            <i align="right" class="bi bi-arrow-left-square-fill"></i>
+        </div>
+    </header>
+    <fieldset>
+        <h1>Admin Dashboard</h1>
+        <ul class="dashboard-list">
+            <li><a href="manage_users.php"><i class="fas fa-users"></i> Manage Users</a></li>
+            <li><a href="manage_vendors.php"><i class="fas fa-store"></i> Manage Vendors</a></li>
+            <li><a href="manage_requests.php"><i class="fas fa-shipping-fast"></i> Manage Requests</a></li>
+        </ul>
+    </fieldset>
+    <footer>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 LocalFinder. All rights reserved.
+        </div>
+    </footer>
+    <script src="scripts/app.js" type="text/javascript"></script>
+
+</body>
+
+</html>

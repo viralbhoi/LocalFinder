@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Update User Profile</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div id="logo_1"></div>
+        <div>
+            <nav>
+                <div><a href="index.html">Home</a></div>
+                <div><a href="user_profile_view.html">View Profile</a></div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="reg_screen">
+        <fieldset class="reg1">
+            <legend>
+                <h2>Update Profile</h2>
+            </legend>
+            <form name="update_form" action="user_profile_view.html"><!--method="post"-->
+                <label for="name">Username:</label>
+                <input type="text" id="name" value="johndoe" required /><br /><br />
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" value="johndoe@example.com" required /><br /><br />
+                <label for="mob">Mobile No.:</label>
+                <input type="number" id="mob" value="1234567890" required /><br /><br />
+                <label for="address">Address: </label>
+                <textarea id="address" rows="5">123 Main St, Anytown</textarea><br /><br />
+                <label for="District">District:</label>
+                <input type="text" id="District" value="Anytown" required /><br /><br />
+                <label for="State">State:</label>
+                <input type="text" id="State" value="CA" required /><br /><br />
+                <input type="submit" value="Update" id="sub1" required />
+                <input type="reset" id="sub1" />
+            </form>
+        </fieldset>
+    </section>
+
+    <footer>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 LocalFinder. All rights reserved.
+        </div>
+    </footer>
+    <script src="scripts/app.js"></script>
+
+</body>
+
+</html>
