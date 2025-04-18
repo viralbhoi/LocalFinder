@@ -65,9 +65,3 @@ Start Apache and MySQL via XAMPP, then open:
 
 http://localhost/LocalFinder/
 
-### 🚨 Security Note
-- This is a college-level project and does not implement full production-grade security. If you're planning to take it live:
-- Sanitize and validate all inputs
-- Use password hashing (password_hash)
-- Protect against SQL injection (PDO is used, but prepared statements should be checked)
-- Add sessions and token-based CSRF protection
