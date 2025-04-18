@@ -41,7 +41,7 @@
 
 ### 1. Clone the Repository
 
-git clone https://github.com/your-username/LocalFinder.git
+git clone https://github.com/viralbhoi/LocalFinder.git
 
 ### 2. Move to XAMPP htdocs
 Place the LocalFinder folder inside:
@@ -56,10 +56,11 @@ localfinder
 Import the SQL file:
 projectv3 (6).sql from the root folder
 
-### 💡 No need to configure database credentials — credentials are already set in pdo.php:
+## 💡 No need to configure database credentials — credentials are already set in pdo.php:
 
 $pdo = new PDO("mysql:host=localhost;dbname=localfinder", "root", "");
-4. Run the Project
+
+### 4. Run the Project
 Start Apache and MySQL via XAMPP, then open:
 
 http://localhost/LocalFinder/
