@@ -1,0 +1,130 @@
+<?php
+    if(isset($_POST['name']))
+    {
+        require_once "pdo.php";
+        $sql='INSERT INTO contact_message(`Name`,`Email`,`Message`) VALUES ("'.$_POST['name'].'","'.$_POST['email'].'","'.$_POST['message'].'")';
+        if($pdo->exec($sql))
+        {
+            echo "<script type='text/javascript'>alert('Successfully Send!!!')</script>";
+        }
+        else{
+            echo "<script type='text/javascript'>alert('Something went Wrong!!!')</script>";
+        }
+    }
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Contact Us - LocalFinder</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="scripts/app.js" type="text/javascript"></script>
+
+    <style>
+        
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="logo_1"></div>
+        <div>
+            <nav>
+                <div><a href="login.php"><i class="fas fa-sign-in-alt"></i> Log In</a></div>
+                <div><a href="user_reg.php"><i class="fas fa-user-plus"></i> Register</a></div>
+                <div><a href="about.php"><i class="fas fa-info-circle"></i> About Us</a></div>
+                <div><a href="contact.php"><i class="fas fa-envelope"></i> Contact Us</a></div>
+            </nav>
+            <div class="set-location">
+            </div>
+            <div id="Left">
+
+                <select name="locate" id="locate">
+                    <option value="Anand">Anand</option>
+                </select>
+                <div id="search_box">
+                    <i class="fas fa-search"></i>
+                  <input type="text" id="search" placeholder="Search..." />
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="contact">
+        <h2>Contact LocalFinder</h2>
+        <p>
+            We'd love to hear from you! If you have any questions, feedback, or
+            inquiries, please don't hesitate to get in touch with us.
+        </p>
+
+        <h3>Contact Information</h3>
+        <p>
+            <strong>Email:</strong> <a href="mailto:support@localfinder.com"><i class="fas fa-envelope"></i> support@localfinder.com</a>
+        </p>
+        <p>
+            <strong>Phone:</strong> (123) 456-7890
+        </p>
+
+        <h3>Mailing Address</h3>
+        <p>
+            LocalFinder Headquarters<br />
+            123 Main Street<br />
+            Anytown, CA 12345
+        </p>
+
+        <h3>Contact Form</h3>
+        <form method="post">
+            <label for="name"><i class="fas fa-user"></i> Your Name:</label><br />
+            <input type="text" id="name" name="name" required /><br /><br />
+
+            <label for="email"><i class="fas fa-envelope"></i> Your Email:</label><br />
+            <input type="email" id="email" name="email" required /><br /><br />
+
+            <label for="message"><i class="fas fa-comment"></i> Message:</label><br />
+            <textarea id="message" name="message" rows="5" required></textarea><br /><br />
+
+            <input type="submit" id="sub1" name='submit'value="Submit" />
+        </form>
+    </section>
+    <footer>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 LocalFinder. All rights reserved.
+        </div>
+    </footer>
+</body>
+
+</html>
